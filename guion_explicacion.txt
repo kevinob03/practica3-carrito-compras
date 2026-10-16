@@ -1,0 +1,51 @@
+GUION PARA EXPLICAR LA PRÁCTICA 3: CARRITO DE COMPRAS
+
+1. IDEA GENERAL
+Este proyecto simula el carrito de compras de una tienda. Permite crear productos,
+agregarlos al carrito si hay existencias, aplicar un cupón y mostrar el total final.
+
+2. ARCHIVO Producto.js
+Aquí está la clase Producto. Cada producto tiene tres propiedades:
+- nombre: identifica el producto.
+- precio: indica cuánto cuesta una unidad.
+- cantidadDisponible: es el stock que queda en la tienda.
+
+El constructor también evita crear productos con datos inválidos, por ejemplo un
+precio o una cantidad negativa.
+
+3. ARCHIVO CarritoDeCompras.js
+Aquí está la clase que controla el carrito. La propiedad #productos es privada,
+por eso solo la clase puede modificar directamente los productos que contiene.
+
+El método agregarProducto(producto, cantidad) hace dos validaciones importantes:
+primero revisa que la cantidad sea un entero mayor que cero; después compara la
+cantidad solicitada con cantidadDisponible. Si no hay suficiente stock, muestra
+un error y no modifica nada. Si sí hay stock, agrega el producto al carrito y
+resta esa cantidad del inventario para que el stock nunca sea negativo.
+
+Si el mismo producto se agrega otra vez, no se crea una línea repetida: solo se
+suma la nueva cantidad a la que ya estaba en el carrito.
+
+4. CÁLCULO DEL TOTAL Y CUPÓN
+calcularTotal() recorre los productos del carrito y suma precio por cantidad de
+cada uno. aplicarCupon(porcentaje) guarda el descuento, validando que esté entre
+0 y 100. Finalmente, mostrarResumen() calcula el descuento y devuelve un texto
+con el detalle de cada producto, el subtotal, el descuento y el total final.
+
+5. ARCHIVO main.js
+En main.js creo cuatro productos: laptop, mouse, teclado y audífonos. Después
+creo un carrito y agrego cantidades distintas de cada producto. Luego intento
+agregar cuatro teclados adicionales, pero solo quedan tres en stock. Ese intento
+queda dentro de try/catch para mostrar el mensaje de error sin detener el programa.
+
+Después aplico un cupón del 10% e imprimo el resumen final en la consola.
+
+6. ARCHIVO index.html
+index.html carga los archivos JavaScript en el orden correcto: primero Producto,
+luego CarritoDeCompras y finalmente main. Al abrir la página y usar F12, la consola
+muestra el error controlado de stock insuficiente y el resumen del carrito.
+
+7. RESULTADO ESPERADO
+El subtotal es $1105.00. Con el cupón del 10%, el descuento es $110.50 y el total
+final es $994.50. El stock del teclado no llega a ser negativo porque la clase
+rechaza la solicitud que supera las unidades disponibles.
